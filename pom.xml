@@ -201,6 +201,36 @@
                     </argLine>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.13.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-typescript-api-client</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.build.directory}/swagger/swagger.json</inputSpec>
+                            <generatorName>typescript-angular</generatorName>
+                            <output>${project.build.directory}/generated-sources/typescript</output>
+                            <skipValidateSpec>true</skipValidateSpec>
+                            <configOptions>
+                                <supportsES6>true</supportsES6>
+                                <npmName>koublis-api-client</npmName>
+                                <npmVersion>1.0.0</npmVersion>
+                                <withInterfaces>true</withInterfaces>
+                                <ngVersion>19.0.2</ngVersion>
+                                <rxjsVersion>7.8.0</rxjsVersion>
+                                <modelPropertyNaming>original</modelPropertyNaming>
+                                <fileNaming>kebab-case</fileNaming>
+                                <useSingleRequestParameter>true</useSingleRequestParameter>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
