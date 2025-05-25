@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS caves
 CREATE TABLE IF NOT EXISTS wines
 (
     id             BINARY(16) PRIMARY KEY,
-    cave_id        BINARY(16) REFERENCES caves (id),
+    cave_id        BINARY(16) NOT NULL REFERENCES caves (id),
     count          INT          NULL,
     name           VARCHAR(50)  NULL UNIQUE,
     vintage        INT          NULL,

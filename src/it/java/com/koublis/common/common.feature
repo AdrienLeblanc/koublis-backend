@@ -6,8 +6,8 @@ Feature: Authentication
   @user
   Scenario: User authentication
     Given url baseUrl + "/auth/sign-up"
-    And def username = "user_" + uuid()
-    And def email = "email_" + uuid().substring(0, 8) + "@test.com"
+    And def username = "user_" + uuid().substring(0, 8)
+    And def email = "user_" + uuid().substring(0, 8) + "@test.com"
     And request
       """
       {
@@ -32,8 +32,8 @@ Feature: Authentication
   @moderator
   Scenario: Moderator authentication
     Given url baseUrl + "/auth/sign-up"
-    And def username = "moderator_" + uuid()
-    And def email = "email_" + uuid().substring(0, 8) + "@test.com"
+    And def username = "moderator_" + uuid().substring(0, 8)
+    And def email = "moderator_" + uuid().substring(0, 8) + "@test.com"
     And request
       """
       {
@@ -58,8 +58,8 @@ Feature: Authentication
   @admin
   Scenario: Admin authentication
     Given url baseUrl + "/auth/sign-up"
-    And def username = "admin_" + uuid()
-    And def email = "email_" + uuid().substring(0, 8) + "@test.com"
+    And def username = "admin_" + uuid().substring(0, 8)
+    And def email = "admin_" + uuid().substring(0, 8) + "@test.com"
     And request
       """
       {

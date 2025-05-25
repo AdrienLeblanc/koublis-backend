@@ -24,10 +24,13 @@ class WineRepositoryTest extends AbstractSpringTest {
 
     @BeforeEach
     void setUp() {
+        caveRepository.deleteAll();
+        wineRepository.deleteAll();
         cave = Cave.builder()
                 .name("Test Cave")
                 .build();
         caveRepository.save(cave);
+        caveRepository.flush();
     }
 
     @AfterEach
@@ -46,6 +49,7 @@ class WineRepositoryTest extends AbstractSpringTest {
 
         // WHEN
         val savedWine = wineRepository.save(wine);
+        wineRepository.flush();
 
         // THEN
         assertThat(savedWine.getId()).isNotNull();
@@ -61,6 +65,7 @@ class WineRepositoryTest extends AbstractSpringTest {
                 .name("Test Wine")
                 .build();
         val savedWine = wineRepository.save(wine);
+        wineRepository.flush();
 
         // WHEN
         val wineFound = wineRepository.findById(savedWine.getId()).orElse(null);
@@ -79,7 +84,10 @@ class WineRepositoryTest extends AbstractSpringTest {
                 .build();
 
         // WHEN
-        val exception = assertThatThrownBy(() -> wineRepository.save(wine));
+        val exception = assertThatThrownBy(() -> {
+            wineRepository.save(wine);
+            wineRepository.flush();
+        });
 
         // THEN
         exception.isInstanceOf(DataIntegrityViolationException.class);

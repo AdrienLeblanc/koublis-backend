@@ -20,8 +20,8 @@ public class Wine {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "cave_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cave_id", nullable = false)
     private Cave cave;
 
     @Column(name = "count")

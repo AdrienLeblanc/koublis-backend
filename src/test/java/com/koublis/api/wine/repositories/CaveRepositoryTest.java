@@ -5,6 +5,7 @@ import com.koublis.api.wine.domain.Cave;
 import com.koublis.api.wine.domain.Wine;
 import lombok.val;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,12 @@ class CaveRepositoryTest extends AbstractSpringTest {
     private CaveRepository caveRepository;
     @Autowired
     private WineRepository wineRepository;
+
+    @BeforeEach
+    void setUp() {
+        caveRepository.deleteAll();
+        wineRepository.deleteAll();
+    }
 
     @AfterEach
     void tearDown() {
@@ -34,6 +41,7 @@ class CaveRepositoryTest extends AbstractSpringTest {
 
         // WHEN
         val savedCave = caveRepository.save(cave);
+        caveRepository.flush();
 
         // THEN
         assertThat(savedCave.getId()).isNotNull();
@@ -48,6 +56,7 @@ class CaveRepositoryTest extends AbstractSpringTest {
                 .name("Test Cave")
                 .build();
         val savedCave = caveRepository.save(cave);
+        caveRepository.flush();
 
         // WHEN
         val foundCave = caveRepository.findById(savedCave.getId()).orElse(null);
@@ -67,6 +76,7 @@ class CaveRepositoryTest extends AbstractSpringTest {
                 .build();
 
         val savedCave = caveRepository.save(cave);
+        caveRepository.flush();
 
         val wine1 = Wine.builder()
                 .cave(savedCave)
@@ -82,6 +92,7 @@ class CaveRepositoryTest extends AbstractSpringTest {
         caveRepository.save(
                 savedCave.withWines(List.of(wine1, wine2))
         );
+        caveRepository.flush();
 
         val caveFound = caveRepository.findById(savedCave.getId()).orElse(null);
         val winesFound = wineRepository.findAllByCaveId(savedCave.getId());

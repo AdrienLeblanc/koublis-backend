@@ -7,7 +7,7 @@ Feature: User sign-up and sign-in
       {
         "username": "testuser",
         "password": "testpassword",
-        "email": "testemail",
+        "email": "testemail@test.com",
         "role": "ROLE_USER"
       }
       """
@@ -33,7 +33,7 @@ Feature: User sign-up and sign-in
       {
         "username": "testuser",
         "password": "testpassword",
-        "email": "testemail",
+        "email": "testemail@test.com",
         "role": "ROLE_USER"
       }
       """
