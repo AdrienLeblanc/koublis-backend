@@ -3,9 +3,12 @@ version: "3.7"
 volumes:
   mysql_volume:
   elasticsearch_volume:
+  verdaccio-storage:
 
 networks:
   app-network:
+    driver: bridge
+  koublis-network:
     driver: bridge
 
 services:
@@ -43,3 +46,14 @@ services:
       - elasticsearch_volume:/usr/share/elasticsearch/data
     networks:
       - app-network
+
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: verdaccio
+    ports:
+      - "4873:4873"
+    volumes:
+      - verdaccio-storage:/verdaccio/storage
+      - ./docker/verdaccio/config.yaml:/verdaccio/conf/config.yaml
+    networks:
+      - koublis-network

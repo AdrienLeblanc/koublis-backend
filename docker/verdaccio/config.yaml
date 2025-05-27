@@ -1,0 +1,28 @@
+
+storage: /verdaccio/storage
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+
+web:
+  title: Koublis NPM Registry
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+packages:
+  '@koublis/*':
+    access: $all
+    publish: $authenticated
+  '@*/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  '**':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+logs:
+  - {type: stdout, format: pretty, level: http}

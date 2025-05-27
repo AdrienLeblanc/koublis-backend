@@ -20,6 +20,7 @@
     <properties>
         <java.version>21</java.version>
         <start-class>com.koublis.Application</start-class>
+        <generated-sources-folder>${project.build.directory}/generated-sources/typescript</generated-sources-folder>
 
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <jackson-databind.version>2.18.3</jackson-databind.version>
@@ -208,17 +209,18 @@
                 <executions>
                     <execution>
                         <id>generate-typescript-api-client</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <inputSpec>${project.build.directory}/swagger/swagger.json</inputSpec>
                             <generatorName>typescript-angular</generatorName>
-                            <output>${project.build.directory}/generated-sources/typescript</output>
+                            <output>${generated-sources-folder}</output>
                             <skipValidateSpec>true</skipValidateSpec>
                             <configOptions>
                                 <supportsES6>true</supportsES6>
-                                <npmName>koublis-api-client</npmName>
+                                <npmName>@koublis/api-client</npmName>
                                 <npmVersion>1.0.0</npmVersion>
                                 <withInterfaces>true</withInterfaces>
                                 <ngVersion>19.0.2</ngVersion>
@@ -230,6 +232,62 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>npm-install</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>${generated-sources-folder}</workingDirectory>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-build</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>${generated-sources-folder}</workingDirectory>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>publish-npm-package</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>${generated-sources-folder}/dist</workingDirectory>
+                            <arguments>
+                                <argument>publish</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <environmentVariables>
+                        <NPM_CONFIG_REGISTRY>http://localhost:4873</NPM_CONFIG_REGISTRY>
+                    </environmentVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
