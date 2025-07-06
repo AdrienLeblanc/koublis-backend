@@ -7,12 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/catalog/wines")
+@RequestMapping(value = "/catalog/wines", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CatalogWineController {
 
     private final CatalogWineService catalogWineService;

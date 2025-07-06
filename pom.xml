@@ -221,7 +221,7 @@
                             <configOptions>
                                 <supportsES6>true</supportsES6>
                                 <npmName>@koublis/api-client</npmName>
-                                <npmVersion>1.0.0</npmVersion>
+                                <npmVersion>1.0.1</npmVersion>
                                 <withInterfaces>true</withInterfaces>
                                 <ngVersion>19.0.2</ngVersion>
                                 <rxjsVersion>7.8.0</rxjsVersion>

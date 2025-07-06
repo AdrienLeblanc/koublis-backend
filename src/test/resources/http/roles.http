@@ -3,9 +3,9 @@ POST http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "password": "testpassword",
-  "email": "testemail",
+  "username": "celld",
+  "password": "connarde",
+  "email": "adrienleblanc53@gmail.com",
   "role": "ROLE_USER"
 }
 
@@ -16,8 +16,8 @@ POST http://localhost:8080/auth/sign-in
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "password": "testpassword"
+  "username": "celld",
+  "password": "connarde"
 }
 
 ###

@@ -7,12 +7,13 @@ import com.koublis.api.auth.controllers.dto.responses.MessageResponse;
 import com.koublis.api.auth.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthController {
 
     private final AuthService authService;

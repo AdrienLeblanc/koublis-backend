@@ -5,6 +5,7 @@ import com.koublis.api.wine.mappers.CaveMapper;
 import com.koublis.api.wine.services.CaveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/caves")
+@RequestMapping(value = "/caves", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CaveController {
 
     private final CaveService caveService;
