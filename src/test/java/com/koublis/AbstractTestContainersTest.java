@@ -10,7 +10,7 @@ import org.testcontainers.elasticsearch.ElasticsearchContainer;
 public abstract class AbstractTestContainersTest {
 
     private static final String MYSQL_IMAGE = "mysql:lts";
-    private static final String ELASTICSEARCH_IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:8.18.0";
+    private static final String ELASTICSEARCH_IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.4.2";
 
     static final MySQLContainer<?> mySqlContainer = new MySQLContainer<>(MYSQL_IMAGE);
     static final ElasticsearchContainer elasticsearchContainer = new ElasticsearchContainer(ELASTICSEARCH_IMAGE);

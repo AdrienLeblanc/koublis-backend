@@ -2,7 +2,7 @@ package com.koublis.configuration.elasticsearch;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties;
+import org.springframework.boot.elasticsearch.autoconfigure.ElasticsearchProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;

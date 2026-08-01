@@ -1,14 +1,14 @@
 package com.koublis.catalog;
 
 
-import com.intuit.karate.junit5.Karate;
 import com.koublis.AbstractSpringIntegrationTest;
+import org.junit.jupiter.api.Test;
 
 class CatalogWinesIntegrationTest extends AbstractSpringIntegrationTest {
 
-    @Karate.Test
-    Karate catalogIT() {
-        return Karate.run().relativeTo(getClass());
+    @Test
+    void catalogIT() {
+        runKarate();
     }
 
 }

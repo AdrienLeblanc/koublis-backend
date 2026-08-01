@@ -3,12 +3,14 @@ package com.koublis.api.catalog.domain;
 import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Getter
 @Builder
+@Jacksonized
 @Document(indexName = "catalog_wines")
 public class CatalogWine {
 

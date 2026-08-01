@@ -2,21 +2,19 @@ package com.koublis;
 
 import lombok.val;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class ApplicationTest extends AbstractSpringTest {
 
     @LocalServerPort
     private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Test
     void contextLoads() throws IOException {
@@ -27,9 +25,18 @@ class ApplicationTest extends AbstractSpringTest {
     }
 
     private void extractSwagger() throws IOException {
-        val openApiJson = restTemplate.getForObject("http://localhost:" + port + "/v3/api-docs", String.class);
+        val openApiJson = RestClient.create()
+                .get()
+                .uri("http://localhost:" + port + "/v3/api-docs")
+                .retrieve()
+                .body(String.class);
+        assertThat(openApiJson).isNotNull();
+
         val targetDirectory = Paths.get("target", "swagger");
         Files.createDirectories(targetDirectory);
-        Files.writeString(targetDirectory.resolve("swagger.json"), openApiJson);
+        val swaggerFile = targetDirectory.resolve("swagger.json");
+        Files.writeString(swaggerFile, openApiJson);
+
+        assertThat(swaggerFile.toFile()).exists();
     }
 }

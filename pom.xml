@@ -14,11 +14,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.4</version>
+        <version>4.1.0</version>
     </parent>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <start-class>com.koublis.Application</start-class>
         <generated-sources-folder>${project.build.directory}/generated-sources/typescript</generated-sources-folder>
 
@@ -27,10 +27,10 @@
         <jjwt.version>0.12.6</jjwt.version>
         <lombok.version>1.18.38</lombok.version>
         <testcontainers.version>1.21.0</testcontainers.version>
-        <karate-junit5.version>1.5.1</karate-junit5.version>
+        <karate-junit5.version>1.5.2</karate-junit5.version>
         <build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-        <springdoc-openapi-starter-webmvc-ui.version>2.8.8</springdoc-openapi-starter-webmvc-ui.version>
+        <springdoc-openapi-starter-webmvc-ui.version>3.0.3</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <dependencies>
@@ -49,6 +49,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -76,6 +81,10 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-flyway</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
@@ -186,6 +195,14 @@
                             <resources>
                                 <resource>
                                     <directory>src/it/resources</directory>
+                                </resource>
+                                <!-- Karate feature files live next to their test classes in src/it/java;
+                                     copy them onto the test classpath so a clean build (CI) can find them. -->
+                                <resource>
+                                    <directory>src/it/java</directory>
+                                    <includes>
+                                        <include>**/*.feature</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
